@@ -1,38 +1,29 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct list_item {
-    int i1;
-    int i2;
-    struct list_item *next;
-} list_item;
-
 int main(int argc, char const *argv[])
 {
-    FILE *f = fopen("input.txt", "r");
+    FILE *f = fopen("/Users/benjaminsteeg/advent_of_code_23/puzzle_1/input.txt", "r");
     int c;
-    list_item *list_head = NULL;
-    list_item *list_tail = NULL;
+    int sum = 0;
     while (c != EOF) {
-        list_item *l = (list_item*) malloc(sizeof(list_item));
-        l->i1 = -1;
-        l->i2 = -1;
-        if (!list_head) {
-            list_head = l;
-            list_tail = l;
-        } else {
-            list_tail->next = l;
-            list_tail = l;
-        }
-        while (c != '\n') {
+        c = fgetc(f);
+        int i1 = -1;
+        int i2 = -1;
+        while (c != '\n' && c != EOF) {
             if (c >= 48 && c <= 57) {
-                if (l->i1 < 0) l->i1 = c;
-                else l->i2 = c;
+                if (i1 < 0) i1 = c - 48;
+                else i2 = c - 48;
             }
             c = fgetc(f);
         }
-        c = fgetc(f);
+        if (i2 > 0) {
+            sum += i1 * 10 + i2;
+        } else if (i1 > 0) {
+            sum += i1 * 10 + i1;
+        }
     }
+    printf("%i\n", sum);
     fclose(f);
     return 0;
 }
