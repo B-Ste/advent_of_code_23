@@ -1,3 +1,5 @@
 /.vscode
 /*/main
 /*/input.txt
+/*/main.dSYM
+.DS_Store
