@@ -59,6 +59,7 @@ int main(int argc, char const *argv[])
         if (possible_game(line, &cube_power)) possible_sum += line_num;
         cube_power_sum += cube_power;
     }
+    fclose(f);
     printf("Solution 1: %i\n", possible_sum);
     printf("Solution 2: %i\n", cube_power_sum);
     return 0;
