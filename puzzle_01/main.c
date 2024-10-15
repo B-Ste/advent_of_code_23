@@ -30,7 +30,7 @@ int parseNumber(char* p, int mode) {
 
 int main(int argc, char const *argv[])
 {
-    FILE *f = fopen("/Users/benjaminsteeg/advent_of_code_23/puzzle_1/input.txt", "r");
+    FILE *f = fopen("/Users/benjaminsteeg/advent_of_code_23/puzzle_01/input.txt", "r");
     int c;
     char str[128] = {0};
     int len;

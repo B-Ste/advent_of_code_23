@@ -47,7 +47,7 @@ int possible_game(char *str, int *cube_power_p) {
 
 int main(int argc, char const *argv[])
 {
-    FILE *f = fopen("/Users/benjaminsteeg/advent_of_code_23/puzzle_2/input.txt", "r");
+    FILE *f = fopen("/Users/benjaminsteeg/advent_of_code_23/puzzle_02/input.txt", "r");
     int line_num = 0;
     int possible_sum = 0;
     int cube_power_sum = 0;
