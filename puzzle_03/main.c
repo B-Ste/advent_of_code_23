@@ -7,48 +7,46 @@
 #define SPECIAL_CHAR(x) ((x) != 0 && (x) != '.' && ((x) < 48 || (x) > 57))
 #define FREE(x) free(x); (x) = NULL;
 
+int lower_bound(char *line, int in) {
+    int i = in;
+    while (i >= 0) {
+        if (!NUMBER(line[i])) break;
+        i--;
+    }
+    return ++i;
+}
+
+int upper_bound(char *line, int in) {
+    int j = in;
+    while (1) {
+        if (!NUMBER(line[j])) break;
+        j++;
+    }
+    return --j;
+}
+
 int *parseNumbers(char *line, int index) {
     int *nums = (int *) malloc(3 * sizeof(int));
     if (!nums) exit(1);
     nums[1] = 1;
     nums[2] = 1;
     if (NUMBER(line[index])) {
-        int i = index;
-        int j = index;
-        while (i >= 0) {
-            if (!NUMBER(line[i])) break;
-            i--;
-        }
-        i++;
-        while (1) {
-            if (!NUMBER(line[j])) break;
-            j++;
-        }
-        j--;
+        int j = upper_bound(line, index);
+        int i = lower_bound(line, index);
         char num[LINE_LENGTH] = {0};
         memcpy(num, line + i, j - i + 1);
         nums[0] = 1;
         nums[1] = atoi(num);
     } else {
         if (index - 1 >= 0 && NUMBER(line[index - 1])) {
-            int i = index - 1;
-            while (i >= 0) {
-                if (!NUMBER(line[i])) break;
-                i--;
-            }
-            i++;
+            int i = lower_bound(line, index - 1);
             char num[LINE_LENGTH] = {0};
             memcpy(num, line + i, index - i);
             nums[0] = 1;
             nums[1] = atoi(num);
         }
         if (NUMBER(line[index + 1])) {
-            int j = index + 1;
-            while (1) {
-                if (!NUMBER(line[j])) break;
-                j++;
-            }
-            j--;
+            int j = upper_bound(line, index + 1);
             char num[LINE_LENGTH] = {0};
             memcpy(num, line + index + 1, j - index);
             nums[0]++;
