@@ -151,11 +151,8 @@ int main(int argc, char const *argv[])
     printf("Solution 2: %i\n", sum_2);
 
     fclose(f);
-    free(line_above);
-    line_above = NULL;
-    free(line);
-    line = NULL;
-    free(line_below);
-    line_below = NULL;
+    FREE(line_above);
+    FREE(line);
+    FREE(line_below);
     return 0;
 }
