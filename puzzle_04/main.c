@@ -32,7 +32,11 @@ int main(int argc, char const *argv[])
     if (!f) exit(1);
 
     char line[256];
-    int sum = 0;
+    int sum_1 = 0;
+    int sum_2 = 0;
+    int card = 0;
+    int card_amount[256];
+    for (int i = 0; i < 256; i++) card_amount[i] = 1;
     while (fgets(line, 256, f)) {
         char *winning_numbers = line + 10;
         *(winning_numbers + 29) = 0;
@@ -40,8 +44,14 @@ int main(int argc, char const *argv[])
         char win_index[100] = {0};
         init_index(win_index, winning_numbers);
         int result = evaluate_on_index(win_index, numbers_gotten);
-        sum += (result > 0) ? pow(2, result - 1) : 0;
+        for (int i = card + 1; i <= card + result; i++) {
+            if (i < 256) card_amount[i] += card_amount[card];
+        }
+        sum_1 += (result > 0) ? pow(2, result - 1) : 0;
+        card++;
     }
-    printf("Solution 1: %i\n", sum);
+    for (int i = 0; i < 206; i++) sum_2 += card_amount[i];
+    printf("Solution 1: %i\n", sum_1);
+    printf("Solution 2: %i\n", sum_2);
     return 0;
 }
