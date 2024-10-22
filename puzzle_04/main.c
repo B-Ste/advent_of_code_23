@@ -18,16 +18,7 @@ int evaluate_on_index(char *index, char *numbers_gotten) {
     return i;
 }
 
-int pow(int x, int y) {
-    int res = 1;
-    for (int i = 0; i < y; i++) {
-        res *= x;
-    }
-    return res;
-}
-
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
     FILE *f = fopen("/Users/benjaminsteeg/advent_of_code_23/puzzle_04/input.txt", "r");
     if (!f) exit(1);
 
@@ -47,9 +38,10 @@ int main(int argc, char const *argv[])
         for (int i = card + 1; i <= card + result; i++) {
             if (i < 256) card_amount[i] += card_amount[card];
         }
-        sum_1 += (result > 0) ? pow(2, result - 1) : 0;
+        sum_1 += (result > 0) ? 1 << (result - 1) : 0;
         card++;
     }
+    fclose(f);
     for (int i = 0; i < 206; i++) sum_2 += card_amount[i];
     printf("Solution 1: %i\n", sum_1);
     printf("Solution 2: %i\n", sum_2);
